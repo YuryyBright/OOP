@@ -17,7 +17,6 @@ class Point:
 
 
 class DataBase:
-
     __instance = None
 
     def __new__(cls, *args, **kwargs):
@@ -50,6 +49,7 @@ class DataBase:
     def write(self, data):
         print(f"Write to DB {data}")
 
+
 db = DataBase('root', '1234', 443)
 db1 = DataBase('root_1', '4321', 443)
 
@@ -57,3 +57,48 @@ print(id(db), id(db1))
 
 db.connect()
 db1.connect()
+
+
+#####  MONO dDATA
+class ThreadData:
+    __shared_attrs = {
+        'name': 'thread_1',
+        'data': {},
+        'id': {}
+    }
+    def __init__(self):
+        self.__dict__['item'] =  self.__shared_attrs
+
+
+th1 = ThreadData()
+th2 = ThreadData()
+
+th1.id = 1
+
+th1.attr_name  = 1
+
+
+class ThreadData:
+    __shared_attrs = {
+        'name': 'thread_1',
+        'data': {},
+        'id': {}
+    }
+
+    def __init__(self):
+        self.__dict__ = self.__shared_attrs
+
+#
+# class ThreadData:
+#     __shared_attrs = {'count': 0
+#
+#                       }
+#
+#     def __init__(self):
+#         self.__dict__['item'] = self.__shared_attrs
+#
+#
+# th1 = ThreadData()
+# th2 = ThreadData()
+# th1.item['count'] = 1
+# th1.item['count'] = 3
